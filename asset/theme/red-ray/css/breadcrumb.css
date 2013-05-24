@@ -1,0 +1,28 @@
+#crumbs {
+	height:2.3em;
+	border:1px solid #dedede;
+	padding:0;
+	margin:0;
+	}
+#crumbs li {
+	float:left;
+	list-style:none;
+	line-height:2.3em;
+	color:#777;
+	padding-left:10px;
+	}		
+#crumbs li a {
+	background:url(../images/crumbs.gif) no-repeat right center;
+	display:block;
+	padding:0 15px 0 0;
+	}							
+#crumbs li a:link,
+#crumbs li a:visited {
+	color:#777;
+	text-decoration:none;
+	}	
+a:link, a:visited,	
+#crumbs li a:hover,
+#crumbs li a:focus {
+	color:#dd2c0d;
+	}	
