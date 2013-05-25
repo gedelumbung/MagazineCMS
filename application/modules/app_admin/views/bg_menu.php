@@ -56,7 +56,7 @@
 					<a href="<?php echo base_url(); ?>app_route"><span class="icon-dashboard"></span>Dashboard</a>
 				</li>
 				<li>
-					<a href="<?php echo base_url(); ?>app_admin/data_dokter"><span class="icon-file-alt"></span>Berita</a>
+					<a href="<?php echo base_url(); ?>app_admin/berita"><span class="icon-file-alt"></span>Berita</a>
 				</li>
 				<li>
 					<a href="<?php echo base_url(); ?>app_admin/user"><span class="icon-cog"></span>Data User</a>

@@ -3,7 +3,7 @@
 		<!-- Headings
 			================================================== -->
 		<section class="row-fluid">
-			<h1 class="box-header"><span class="icon-eject"></span> Status | <?php echo $GLOBALS['site_title']; ?></h1>
+			<h1 class="box-header"><span class="icon-tags"></span> Tags | <?php echo $GLOBALS['site_title']; ?></h1>
 			<div class="box">
 				<div class="well">
 					<?php echo form_open_multipart("app_admin/tags/simpan"); ?>

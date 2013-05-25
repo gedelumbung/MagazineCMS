@@ -18,7 +18,7 @@ $config['modules_locations'] = array(
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost/ci-news/';
+$config['base_url']	= 'http://localhost/MagazineCMS/';
 //$config['base_url']	= 'http://news.gedelumbung.com/';
 
 /*

@@ -292,4 +292,73 @@ class app_global_admin_model extends CI_Model {
 		return $hasil;
 	}
 	 
+	public function generate_index_berita($limit,$offset,$filter=array())
+	{
+		$hasil="";
+		$query_add = "";
+		if(!empty($filter))
+		{
+			if($filter['judul']=="")
+			{
+				$query_add = "";
+			}
+			else
+			{
+				$where['judul_berita'] = $filter['judul_berita']; 
+				$query_add = "where a.judul_berita like '%".$where['judul_berita']."%'";
+			}
+		}
+
+		$tot_hal = $this->db->query("select a.judul_berita, a.tanggal, a.jenis, a.headline, b.menu, a.headline from dlmbg_berita a left join dlmbg_menu b on a.id_kategori=b.id_menu
+		 ".$query_add." order by a.id_berita DESC");
+
+		$config['base_url'] = base_url() . 'app_admin/berita/index/';
+		$config['total_rows'] = $tot_hal->num_rows();
+		$config['per_page'] = $limit;
+		$config['uri_segment'] = 4;
+		$config['first_link'] = 'First';
+		$config['last_link'] = 'Last';
+		$config['next_link'] = 'Next';
+		$config['prev_link'] = 'Prev';
+		$this->pagination->initialize($config);
+
+		$w = $this->db->query("select a.judul_berita, a.id_berita, a.tanggal, a.jenis, a.gambar, a.headline, b.menu, a.headline from dlmbg_berita a left join dlmbg_menu b
+		 on a.id_kategori=b.id_menu ".$query_add." order by a.id_berita DESC LIMIT ".$offset.",".$limit."");
+		
+		$hasil .= "<table class='table table-striped table-condensed'>
+					<thead>
+					<tr>
+					<th>No.</th>
+					<th>Judul</th>
+					<th>Tanggal</th>
+					<th>Tipe</th>
+					<th>Headline</th>
+					<th width='150'><a href='".base_url()."app_admin/berita/tambah' class='btn btn-success btn-small'><i class='icon-plus'></i> Tambah</a></th>
+					</tr>
+					</thead>";
+		$i = $offset+1;
+		foreach($w->result() as $h)
+		{
+			$st="<span class='label label-important'>No</span>";
+			if($h->headline==1){$st="<span class='label label-success'>Yes</span>";}
+			$hasil .= "<tr>
+					<td>".$i."</td>
+					<td>".$h->judul_berita."</td>
+					<td>".time_to_string(gmdate('d/m/Y-H:i:s',$h->tanggal))." WIB</td>
+					<td>".$h->jenis."</td>
+					<td>".$st."</td>
+					<td>";
+					$hasil .= "";
+			$hasil .= "<a href='".base_url()."app_admin/berita/edit/".$h->id_berita."' class='btn btn-inverse btn-small'><i class='icon-edit'></i> Edit</a>";
+			$hasil .= " <a href='".base_url()."app_admin/berita/hapus/".$h->id_berita."/".$h->gambar."' onClick=\"return confirm('Anda yakin?');\" 
+			class='btn btn-danger btn-small'><i class='icon-trash'></i> Hapus</a></td>
+					</tr>";
+			$i++;
+		}
+		$hasil .= '</table>';
+		$hasil .= '<div class="cleaner_h20"></div>';
+		$hasil .= $this->pagination->create_links();
+		return $hasil;
+	}
+	 
 }
