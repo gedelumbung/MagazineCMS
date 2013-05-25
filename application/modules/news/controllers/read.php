@@ -19,7 +19,7 @@ class read extends CI_Controller {
 		$get_detail = $this->db->get_where("dlmbg_berita",array("id_berita"=>$id_param))->row();
 		$this->breadcrumb->append_crumb('Beranda', base_url());
 		$this->breadcrumb->append_crumb($get_kat->menu, base_url().'web/kategori/index/'.$id_kat.'/'.url_title($get_kat->menu,'-',TRUE).'');
-		$this->breadcrumb->append_crumb($get_detail->judul_berita, base_url().'web/bidang');
+		$this->breadcrumb->append_crumb(substr($get_detail->judul_berita,0,65).'...', base_url().'web/bidang');
 
 		$d['meta_description'] = substr($get_detail->isi_berita, 0, 300);
 		$d['meta_keywords'] = $GLOBALS['site_keywords'];
